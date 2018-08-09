@@ -17,6 +17,7 @@ Usage:
 
 """
 
+import os
 import sys
 import glob
 import threading
@@ -30,6 +31,10 @@ if PY2:
     text_type = unicode
 else:
     text_type = str
+
+
+_CURR_PATH = os.path.abspath(os.path.dirname(__file__))
+os.environ.setdefault('MAGIC', os.path.join(_CURR_PATH, 'magic.mgc'))
 
 
 class MagicException(Exception):
