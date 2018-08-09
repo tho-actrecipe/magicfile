@@ -4,18 +4,6 @@ import io
 import os
 
 from setuptools import setup, find_packages
-from wheel.bdist_wheel import bdist_wheel
-
-cmdclass = {}
-
-# patch bdist_wheel
-class _bdist_wheel(bdist_wheel):
-    def get_tag(self):
-        rv = bdist_wheel.get_tag(self)
-        return ('py2.py3', 'none',) + rv[2:]
-
-cmdclass['bdist_wheel'] = _bdist_wheel
-
 
 
 def read(file_name):
@@ -30,11 +18,10 @@ setup(
     author='Adam Hupp',
     author_email='adam@hupp.org',
     url="http://github.com/messense/python-magic",
-    version='0.4.15',
+    version='0.4.16',
     packages=find_packages(exclude=('test', 'test.*')),
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
-    cmdclass=cmdclass,
     install_requires=["cffi>=1.0.0"],
     setup_requires=['cffi>=1.0.0'],
     cffi_modules=["magicfile/_libmagic_build.py:ffi"],

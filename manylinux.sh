@@ -8,12 +8,10 @@ wget -O /tmp/file.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_
 cd /tmp && xz -cd /tmp/file.tar.xz | tar x && cd -
 cd /tmp/file-5.32 && ./configure && make && make install && cd -
 
-# Build wheels
-which linux32 && LINUX32=linux32
-$LINUX32 /opt/python/cp27-cp27mu/bin/python setup.py bdist_wheel
+for PYBIN in /opt/python/cp3*/bin; do
+    "${PYBIN}/python" setup.py bdist_wheel
+done
 
-# Audit wheels
-for wheel in dist/*-linux_*.whl; do
-  auditwheel repair $wheel -w dist/
-  rm $wheel
+for whl in dist/magicfile*.whl; do
+    auditwheel repair "$whl" -w dist/
 done
