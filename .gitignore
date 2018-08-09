@@ -7,3 +7,12 @@ lib/
 python_magic.egg-info
 pip-selfcheck.json
 pyvenv.cfg
+*.c
+*.o
+*.so
+__pycache__
+*.egg-info
+.pytest_cache/
+build/
+dist/
+.eggs
