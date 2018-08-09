@@ -5,7 +5,7 @@ import shutil
 import os.path
 import unittest
 
-import magic
+import magicfile as magic
 
 
 class MagicTest(unittest.TestCase):
@@ -54,7 +54,7 @@ class MagicTest(unittest.TestCase):
             self.assert_values(m, {
                 'magic._pyc_': 'application/octet-stream',
                 'test.pdf': 'application/pdf',
-                'test.gz': 'application/gzip',
+                'test.gz': ('application/gzip', 'application/x-gzip'),
                 'text.txt': 'text/plain',
                 b'\xce\xbb'.decode('utf-8'): 'text/plain',
                 b'\xce\xbb': 'text/plain',
@@ -69,11 +69,6 @@ class MagicTest(unittest.TestCase):
             self.assert_values(m, {
                 'magic._pyc_': 'python 2.4 byte-compiled',
                 'test.pdf': 'PDF document, version 1.2',
-                'test.gz':
-                ('gzip compressed data, was "test", from Unix, last '
-                 'modified: Sun Jun 29 01:32:52 2008',
-                 'gzip compressed data, was "test", last modified'
-                 ': Sun Jun 29 01:32:52 2008, from Unix'),
                 'text.txt': 'ASCII text',
             })
         finally:
