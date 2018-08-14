@@ -71,9 +71,8 @@ class Magic(object):
         if uncompress:
             self.flags |= MAGIC_COMPRESS
 
-        self.cookie = magic_open(self.flags)
+        self.cookie = _ffi.gc(magic_open(self.flags), magic_close)
         self.lock = threading.Lock()
-
         magic_load(self.cookie, maybe_encode(magic_file))
 
     def from_buffer(self, buf):
@@ -94,21 +93,6 @@ class Magic(object):
             pass
         with self.lock:
             return magic_file(self.cookie, filename)
-
-    def __del__(self):
-        # no _thread_check here because there can be no other
-        # references to this object at this point.
-
-        # during shutdown magic_close may have been cleared already so
-        # make sure it exists before using it.
-
-        # the self.cookie check should be unnecessary and was an
-        # incorrect fix for a threading problem, however I'm leaving
-        # it in because it's harmless and I'm slightly afraid to
-        # remove it.
-        if self.cookie and magic_close:
-            magic_close(self.cookie)
-            self.cookie = None
 
 _instances = {}
 
