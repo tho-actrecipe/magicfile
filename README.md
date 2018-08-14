@@ -1,8 +1,7 @@
-# python-magic
-[![PyPI version](https://badge.fury.io/py/python-magic.svg)](https://badge.fury.io/py/python-magic)
-[![Build Status](https://travis-ci.org/ahupp/python-magic.svg?branch=master)](https://travis-ci.org/ahupp/python-magic)
+# magicfile (A CFFI fork of python-magic)
+[![PyPI version](https://badge.fury.io/py/magicfile.svg)](https://badge.fury.io/py/magicfile)
 
-python-magic is a python interface to the libmagic file type
+magicfile is a python interface to the libmagic file type
 identification library.  libmagic identifies file types by checking
 their headers according to a predefined list of file types. This
 functionality is exposed to the command line by the Unix command
@@ -11,7 +10,7 @@ functionality is exposed to the command line by the Unix command
 ## Usage
 
 ```python
->>> import magic
+>>> import magicfile as magic
 >>> magic.from_file("testdata/test.pdf")
 'PDF document, version 1.2'
 >>> magic.from_buffer(open("testdata/test.pdf").read(1024))
@@ -52,28 +51,12 @@ There are, sadly, two libraries which use the module name `magic`.  Both have be
 ## Installation
 
 The current stable version of python-magic is available on pypi and
-can be installed by running `pip install python-magic`.
+can be installed by running `pip install magicfile`.
 
 Other sources:
 
-- pypi: http://pypi.python.org/pypi/python-magic/
-- github: https://github.com/ahupp/python-magic
-
-### Windows
-
-You'll need DLLs for libmagic.  @julian-r has uploaded a version of this project that includes binaries to pypi:
-https://pypi.python.org/pypi/python-magic-bin/0.4.14
-
-Other sources of the libraries in the past have been [File for Windows](http://gnuwin32.sourceforge.net/packages/file.htm) .  You will need to copy the file `magic` out of `[binary-zip]\share\misc`, and pass its location to `Magic(magic_file=...)`.  
-
-If you are using a 64-bit build of python, you'll need 64-bit libmagic binaries which can be found here: https://github.com/pidydx/libmagicwin64. Newer version can be found here: https://github.com/nscaife/file-windows.
-
-
-
-### OSX
-
-- When using Homebrew: `brew install libmagic`
-- When using macports: `port install file`
+- pypi: http://pypi.python.org/pypi/magicfile/
+- github: https://github.com/messense/magicfile
 
 ### Troubleshooting
 
@@ -114,8 +97,6 @@ Thanks to these folks on github who submitted features and bugfixes.
 
 ## License
 
-python-magic is distributed under the MIT license.  See the included
+magicfile is distributed under the MIT license.  See the included
 LICENSE file for details.
-
-I am providing code in the repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not my employer (Facebook)
 
