@@ -10,7 +10,7 @@ python:
   - "3.6"
 
 install:
-  - sudo apt-get install -y libmagic1
+  - sudo apt-get install -y libmagic1-dev
   - pip install coverage
   - python setup.py install
 
