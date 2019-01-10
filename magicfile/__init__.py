@@ -71,7 +71,7 @@ class Magic(object):
         if uncompress:
             self.flags |= MAGIC_COMPRESS
 
-        self.cookie = _ffi.gc(magic_open(self.flags), magic_close)
+        self.cookie = _ffi.gc(magic_open(self.flags), _lib.magic_close)
         self.lock = threading.Lock()
         magic_load(self.cookie, maybe_encode(magic_file))
 
