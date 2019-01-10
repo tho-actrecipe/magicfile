@@ -10,7 +10,10 @@ python:
   - "3.6"
 
 install:
-  - sudo apt-get install -y libmagic1-dev
+  - sudo apt-get install -y libffi-dev
+  - wget -O /tmp/file.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.32.orig.tar.xz
+  - cd /tmp && xz -cd /tmp/file.tar.xz | tar x && cd -
+  - cd /tmp/file-5.32 && ./configure && make && make install && cd -
   - pip install coverage
   - python setup.py install
 
