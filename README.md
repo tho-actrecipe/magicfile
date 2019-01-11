@@ -50,7 +50,7 @@ There are, sadly, two libraries which use the module name `magic`.  Both have be
 
 ## Installation
 
-The current stable version of python-magic is available on pypi and
+The current stable version of magicfile is available on pypi and
 can be installed by running `pip install magicfile`.
 
 Other sources:

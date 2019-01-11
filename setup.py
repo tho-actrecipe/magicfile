@@ -18,7 +18,7 @@ setup(
     author='Adam Hupp',
     author_email='adam@hupp.org',
     url="http://github.com/messense/python-magic",
-    version='0.4.20',
+    version='0.4.21',
     packages=find_packages(exclude=('test', 'test.*')),
     include_package_data=True,
     long_description=read('README.md'),
