@@ -184,6 +184,10 @@ def magic_buffer(cookie, value):
         return _ffi.string(result).decode('utf8')
 
 
+def version():
+    return _lib.magic_version()
+
+
 MAGIC_NONE = 0x000000 # No flags
 MAGIC_DEBUG = 0x000001 # Turn on debugging
 MAGIC_SYMLINK = 0x000002 # Follow symlinks

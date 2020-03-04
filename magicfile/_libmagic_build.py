@@ -17,6 +17,7 @@ ffi.cdef('''
     int magic_check(magic_t, const char *);
 //  int magic_list(magic_t, const char *);
     int magic_errno(magic_t);
+    int magic_version(void);
 ''')
 ffi.set_source(
     'magicfile._libmagic',

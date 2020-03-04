@@ -11,6 +11,9 @@ import magicfile as magic
 class MagicTest(unittest.TestCase):
     TESTDATA_DIR = os.path.join(os.path.dirname(__file__), 'testdata')
 
+    def test_version(self):
+        self.assertTrue(magic.version() > 0)
+
     def assert_values(self, m, expected_values):
         for filename, expected_value in expected_values.items():
             try:
