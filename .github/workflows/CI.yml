@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -18,15 +18,11 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
-      - name: Install libmagic (Ubuntu)
-        if: matrix.os == 'ubuntu-latest'
+      - name: Install libmagic
         run: |
             wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.38.orig.tar.gz
             cd /tmp && tar zxf file.tar.gz && cd -
             cd /tmp/file-5.38 && ./configure --prefix=/usr/local && make && sudo make install && cd -
-      - name: Install libmagic (macOS)
-        if: matrix.os == 'macos-latest'
-        run: brew install libmagic
       - name: Run test cases
         run: |
             pip install coverage
