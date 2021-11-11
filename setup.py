@@ -18,7 +18,7 @@ setup(
     author='Adam Hupp',
     author_email='adam@hupp.org',
     url="http://github.com/messense/magicfile",
-    version='0.4.23',
+    version='0.4.24',
     packages=find_packages(exclude=('test', 'test.*')),
     include_package_data=True,
     long_description=read('README.md'),
