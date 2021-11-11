@@ -36,14 +36,7 @@ jobs:
             python setup.py bdist_wheel
             delocate-wheel -v dist/*.whl
             ls -lrth dist/
-      - name: Publish macOS package
-        if: matrix.os == 'macos-latest'
+      - name: Publish to PyPI
         run: |
             pip install twine
             TWINE_USERNAME=__token__ TWINE_PASSWORD=${{ secrets.pypi_password }} twine upload --skip-existing dist/*
-      - name: Publish manylinux1 package
-        if: matrix.os == 'ubuntu-latest'
-        uses: pypa/gh-action-pypi-publish@master
-        with:
-          user: __token__
-          password: ${{ secrets.pypi_password }}
