@@ -39,7 +39,7 @@ jobs:
     - name: Build manylinux wheels
       if: matrix.os == 'ubuntu-20.04'
       run: |
-        docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_x86_64 sh manylinux.sh
+        docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2010_x86_64 sh manylinux.sh
         ls -lrth dist/
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
