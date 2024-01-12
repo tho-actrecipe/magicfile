@@ -18,7 +18,7 @@ setup(
     author='ActRecipe Inc.',
     author_email='actrecipe-dev@actrecipe.com',
     url="https://github.com/tho-actrecipe/magicfile",
-    version='0.4.28',
+    version='0.4.29',
     packages=find_packages(exclude=('test', 'test.*')),
     include_package_data=True,
     long_description=read('README.md'),
