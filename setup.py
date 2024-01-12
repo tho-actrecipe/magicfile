@@ -29,6 +29,7 @@ setup(
     keywords="mime magic file",
     license="MIT",
     test_suite='test',
+    python_requires=">=3.6",
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
