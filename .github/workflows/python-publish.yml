@@ -35,14 +35,14 @@ jobs:
     - name: Build manylinux wheels
       if: matrix.os == 'ubuntu-latest'
       run: |
-        docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2010_x86_64 sh manylinux.sh
+        docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux_2_28_x86_64 sh manylinux.sh
         ls -lrth dist/
     - name: Build macOS wheels
       if: matrix.os == 'macos-latest'
       run: |
-        wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.38.orig.tar.gz
+        wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.45.orig.tar.gz
         cd /tmp && tar zxf file.tar.gz && cd -
-        cd /tmp/file-5.38 && ./configure --prefix=/usr/local && make && sudo make install && cd -
+        cd /tmp/file-5.45 && ./configure --prefix=/usr/local && make && sudo make install && cd -
         pip install wheel delocate
         python setup.py bdist_wheel
         delocate-wheel -v dist/*.whl
