@@ -18,7 +18,7 @@ setup(
     author='ActRecipe Inc.',
     author_email='actrecipe-dev@actrecipe.com',
     url="https://github.com/tho-actrecipe/magicfile",
-    version='0.4.30',
+    version='0.4.31',
     packages=find_packages(exclude=('test', 'test.*')),
     include_package_data=True,
     long_description=read('README.md'),
@@ -29,7 +29,7 @@ setup(
     keywords="mime magic file",
     license="MIT",
     test_suite='test',
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',

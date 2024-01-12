@@ -1,4 +1,4 @@
-# actrecipe-magic-file (A CFFI fork of python-magic)
+# actrecipemagicfile (A CFFI fork of python-magic)
 [![PyPI version](https://badge.fury.io/py/actrecipemagicfile.svg)](https://badge.fury.io/py/actrecipemagicfile)
 
 `actrecipemagicfile` is a Python interface to the libmagic file type identification library. libmagic identifies file types by checking their headers against a predefined list. This functionality is accessible from the command line using the Unix command `file`.
