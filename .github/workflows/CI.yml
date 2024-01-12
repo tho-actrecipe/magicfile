@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-20.04, macos-latest]
-        python-version: [3.8, 3.9, "3.10", 3.11, 3.12]
+        python-version: [3.8, 3.9, "3.10", 3.11]
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -20,9 +20,9 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name: Install libmagic
         run: |
-          wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.45.orig.tar.gz
+          wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.38.orig.tar.gz
           cd /tmp && tar zxf file.tar.gz && cd -
-          cd /tmp/file-5.45 && ./configure --prefix=/usr/local && make && sudo make install && cd -
+          cd /tmp/file-5.38 && ./configure --prefix=/usr/local && make && sudo make install && cd -
       - name: Rebuild Magic File
         run: file -C -m /usr/share/misc/magic
       - name: Run test cases

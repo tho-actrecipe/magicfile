@@ -5,9 +5,9 @@ set -e -x
 yum -y install gcc libffi-devel wget
 
 # Download and install the correct version of the 'file' utility
-wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.45.orig.tar.gz
+wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.38.orig.tar.gz
 cd /tmp && tar zxf file.tar.gz && cd -
-cd /tmp/file-5.45 && ./configure && make && make install && cd -
+cd /tmp/file-5.38 && ./configure && make && make install && cd -
 
 # Rebuild the magic file using the correct 'file' utility version
 file -C -m /usr/share/misc/magic
