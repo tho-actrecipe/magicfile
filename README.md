@@ -1,7 +1,7 @@
-# magicfile (A CFFI fork of python-magic)
+# magic_file (A CFFI fork of python-magic)
 [![PyPI version](https://badge.fury.io/py/magicfile.svg)](https://badge.fury.io/py/magicfile)
 
-magicfile is a python interface to the libmagic file type
+magic_file is a python interface to the libmagic file type
 identification library.  libmagic identifies file types by checking
 their headers according to a predefined list of file types. This
 functionality is exposed to the command line by the Unix command

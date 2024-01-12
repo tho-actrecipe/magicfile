@@ -13,12 +13,12 @@ def read(file_name):
         return f.read()
 
 setup(
-    name='magicfile',
+    name='magic_file',
     description='File type identification using libmagic',
-    author='Adam Hupp',
-    author_email='adam@hupp.org',
-    url="http://github.com/messense/magicfile",
-    version='0.4.27',
+    author='ActRecipe Inc.',
+    author_email='actrecipe-dev@actrecipe.com',
+    url="https://github.com/tho-actrecipe/magicfile",
+    version='0.4.28',
     packages=find_packages(exclude=('test', 'test.*')),
     include_package_data=True,
     long_description=read('README.md'),
@@ -33,10 +33,11 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
 )
