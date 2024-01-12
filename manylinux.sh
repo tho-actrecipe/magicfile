@@ -14,7 +14,7 @@ for PYBIN in /opt/python/cp3*/bin; do
     "${PYBIN}/python" setup.py bdist_wheel
 done
 
-for whl in dist/magicfile*.whl; do
-    auditwheel repair "$whl" -w dist/
-    rm "$whl"
-done
+#for whl in dist/magicfile*.whl; do
+#    auditwheel repair "$whl" -w dist/
+#    rm "$whl"
+#done
