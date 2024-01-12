@@ -13,12 +13,12 @@ def read(file_name):
         return f.read()
 
 setup(
-    name='actrecipe-magic-file',
+    name='actrecipemagicfile',
     description='File type identification using libmagic',
     author='ActRecipe Inc.',
     author_email='actrecipe-dev@actrecipe.com',
     url="https://github.com/tho-actrecipe/magicfile",
-    version='0.4.29',
+    version='0.4.30',
     packages=find_packages(exclude=('test', 'test.*')),
     include_package_data=True,
     long_description=read('README.md'),
