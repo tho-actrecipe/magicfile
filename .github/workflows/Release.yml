@@ -14,7 +14,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         python-version: [3.8, 3.9, "3.10", 3.11, 3.12]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -29,9 +29,9 @@ jobs:
       - name: Build macOS wheels
         if: matrix.os == 'macos-latest'
         run: |
-            wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.45.orig.tar.gz
+            wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.40.orig.tar.gz
             cd /tmp && tar zxf file.tar.gz && cd -
-            cd /tmp/file-5.45 && ./configure --prefix=/usr/local && make && sudo make install && cd -
+            cd /tmp/file-5.40 && ./configure --prefix=/usr/local && make && sudo make install && cd -
             pip install wheel delocate
             python setup.py bdist_wheel
             delocate-wheel -v dist/*.whl
