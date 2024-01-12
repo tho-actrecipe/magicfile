@@ -20,11 +20,13 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name: Install libmagic
         run: |
-            wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.45.orig.tar.gz
-            cd /tmp && tar zxf file.tar.gz && cd -
-            cd /tmp/file-5.45 && ./configure --prefix=/usr/local && make && sudo make install && cd -
+          wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.45.orig.tar.gz
+          cd /tmp && tar zxf file.tar.gz && cd -
+          cd /tmp/file-5.45 && ./configure --prefix=/usr/local && make && sudo make install && cd -
+      - name: Configure magic file
+        run: file -C -m /usr/share/misc/magic
       - name: Run test cases
         run: |
-            pip install coverage
-            python setup.py install
-            coverage run setup.py test
+          pip install coverage
+          python setup.py install
+          coverage run setup.py test
