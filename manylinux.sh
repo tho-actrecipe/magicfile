@@ -4,9 +4,9 @@ set -e -x
 # Install dependencies needed by our wheel
 yum -y install gcc libffi-devel wget
 
-wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.45.orig.tar.gz
+wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.38.orig.tar.gz
 cd /tmp && tar zxf file.tar.gz && cd -
-cd /tmp/file-5.45 && ./configure && make && make install && cd -
+cd /tmp/file-5.38 && ./configure && make && make install && cd -
 
 for PYBIN in /opt/python/cp3*/bin; do
     "${PYBIN}/python" setup.py bdist_wheel
