@@ -9,9 +9,6 @@ wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_
 cd /tmp && tar zxf file.tar.gz && cd -
 cd /tmp/file-5.38 && ./configure && make && make install && cd -
 
-# Rebuild the magic file using the correct 'file' utility version
-file -C -m /usr/share/misc/magic
-
 # Continue with your original script
 for PYBIN in /opt/python/cp3*/bin; do
     "${PYBIN}/python" setup.py bdist_wheel
