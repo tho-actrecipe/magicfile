@@ -13,7 +13,7 @@ def read(file_name):
         return f.read()
 
 setup(
-    name='magic_file',
+    name='actrecipe-magic-file',
     description='File type identification using libmagic',
     author='ActRecipe Inc.',
     author_email='actrecipe-dev@actrecipe.com',
