@@ -21,11 +21,10 @@ permissions:
 
 jobs:
   deploy-macos:
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     environment: production
     strategy:
       matrix:
-        os: [ macos-latest ]
         python-version: [ 3.8, 3.9, "3.10", 3.11 ]
         arch: [ x86_64, arm64 ]
 
@@ -40,26 +39,16 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
-      - name: Set Architecture Flags
-        run: |
-          if [ "${{ matrix.arch }}" = "arm64" ]; then
-            export ARCH_FLAGS="-arch arm64"
-          else
-            export ARCH_FLAGS="-arch x86_64"
-          fi
-        shell: bash
-
       - name: Build macOS wheels
         run: |
-          wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.38.orig.tar.gz
-          cd /tmp && tar zxf file.tar.gz && cd -
-          cd /tmp/file-5.38 && ./configure --prefix=/usr/local && make && sudo make install && cd -
-          pip install wheel delocate
-          python setup.py bdist_wheel
+          mkdir -p dist
+          if [ "${{ matrix.arch }}" = "arm64" ]; then
+            arch -arm64 python setup.py bdist_wheel
+          else
+            arch -x86_64 python setup.py bdist_wheel
+          fi
           delocate-wheel -v dist/*.whl
           ls -lrth dist/
-        env:
-          ARCH_FLAGS: $ARCH_FLAGS
 
       - name: Publish package
         run: |
@@ -71,11 +60,10 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
 
   deploy-linux:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-20.04
     environment: production
     strategy:
       matrix:
-        os: [ ubuntu-20.04 ]
         python-version: [ 3.8, 3.9, "3.10", 3.11 ]
         arch: [ x86_64, aarch64 ]
 
@@ -90,12 +78,18 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
+      - name: Install QEMU for ARM builds
+        if: matrix.arch == 'aarch64'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu qemu-user-static
+
       - name: Build manylinux wheels
         run: |
           if [ "${{ matrix.arch }}" = "x86_64" ]; then
-            docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_x86_64 sh manylinux.sh
+            docker run --platform linux/amd64 --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_x86_64 sh manylinux.sh
           elif [ "${{ matrix.arch }}" = "aarch64" ]; then
-            docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_aarch64 sh manylinux.sh
+            docker run --platform linux/arm64 --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_aarch64 sh manylinux.sh
           fi
           ls -lrth dist/
 
@@ -107,3 +101,4 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+
