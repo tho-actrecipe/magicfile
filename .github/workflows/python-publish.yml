@@ -31,6 +31,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Dependencies (Homebrew)
+        run: |
+          if [ "${{ matrix.arch }}" = "arm64" ]; then
+            arch -arm64 brew install libmagic
+          else
+            brew install libmagic
+          fi
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -39,10 +47,9 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
-      - name: Install Dependencies
+      - name: Install Python Dependencies
         run: |
-          python -m pip install --upgrade pip setuptools wheel
-          python -m pip install delocate
+          python -m pip install --upgrade pip setuptools wheel delocate
 
       - name: Build macOS wheels
         run: |
@@ -80,9 +87,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
-
       - name: Install QEMU for ARM builds
         if: matrix.arch == 'aarch64'
         run: |
@@ -91,10 +95,18 @@ jobs:
 
       - name: Build manylinux wheels
         run: |
+          # Ensure project files are accessible to Docker container
+          PROJECT_DIR=`pwd`
           if [ "${{ matrix.arch }}" = "x86_64" ]; then
-            docker run --platform linux/amd64 --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_x86_64 sh manylinux.sh
+            docker run --platform linux/amd64 --rm \
+              -v $PROJECT_DIR:/io \
+              quay.io/pypa/manylinux2014_x86_64 \
+              /opt/python/cp${{ matrix.python-version//./}}-cp${{ matrix.python-version//./}}/bin/python /io/setup.py bdist_wheel
           elif [ "${{ matrix.arch }}" = "aarch64" ]; then
-            docker run --platform linux/arm64 --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_aarch64 sh manylinux.sh
+            docker run --platform linux/arm64 --rm \
+              -v $PROJECT_DIR:/io \
+              quay.io/pypa/manylinux2014_aarch64 \
+              /opt/python/cp${{ matrix.python-version//./}}-cp${{ matrix.python-version//./}}/bin/python /io/setup.py bdist_wheel
           fi
           ls -lrth dist/
 
@@ -106,4 +118,3 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-
