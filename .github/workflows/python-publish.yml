@@ -70,7 +70,11 @@ jobs:
       run: python -c "import sys; print(sys.version)"
     - name: Build manylinux wheels
       run: |
-        docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_x86_64 sh manylinux.sh
+        docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_x86_64 sh -c "
+          python3 -m ensurepip --upgrade &&
+          python3 -m pip install --upgrade pip setuptools &&
+          sh manylinux.sh
+        "
         ls -lrth dist/
     - name: Publish package
       run: |
