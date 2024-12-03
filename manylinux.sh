@@ -11,6 +11,11 @@ cd /tmp/file-5.38 && ./configure && make && make install && cd -
 
 # Continue with your original script
 for PYBIN in /opt/python/cp3*/bin; do
+    # Skip Python 3.13 binaries
+    if [[ "${PYBIN}" == *cp313* ]]; then
+        echo "Skipping Python 3.13: ${PYBIN}"
+        continue
+    fi
     "${PYBIN}/python" -m pip install --upgrade pip
     "${PYBIN}/pip" install setuptools wheel cffi
     "${PYBIN}/python" setup.py bdist_wheel
