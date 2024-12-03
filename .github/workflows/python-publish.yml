@@ -13,9 +13,6 @@ on:
     workflows: [ "CI" ]
     types:
       - completed
-    branches:
-      - master
-      - develop
 
 permissions:
   contents: read
