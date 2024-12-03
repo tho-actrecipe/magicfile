@@ -41,4 +41,4 @@ You can also combine the flag options:
 `actrecipemagicfile` is distributed under the MIT license.  See the included
 LICENSE file for details.
 
-Note: This package is mostly used in an internal project.
+Note: This package is primarily used in an internal project. The original package is [python-magic]
