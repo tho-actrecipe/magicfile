@@ -11,6 +11,8 @@ cd /tmp/file-5.38 && ./configure && make && make install && cd -
 
 # Continue with your original script
 for PYBIN in /opt/python/cp3*/bin; do
+    "${PYBIN}/python" -m pip install --upgrade pip
+    "${PYBIN}/pip" install setuptools wheel
     "${PYBIN}/python" setup.py bdist_wheel
 done
 
