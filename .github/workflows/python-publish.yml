@@ -59,7 +59,6 @@ jobs:
       matrix:
         os: [ macos-13-xlarge ]
         python-version: [ 3.8, 3.9, "3.10", 3.11 ]
-        arch: [ arm64 ]
 
     steps:
       - uses: actions/checkout@v4
@@ -106,8 +105,13 @@ jobs:
     - name: Build manylinux wheels
       run: |
         docker run --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_x86_64 sh -c "
-          python -m pip install --upgrade pip setuptools &&
-          sh manylinux.sh
+            if ! python -m ensurepip --upgrade; then
+              echo 'ensurepip not available, falling back to get-pip.py...' &&
+              curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py &&
+              python get-pip.py || { echo 'Failed to install pip'; exit 1; }
+            fi &&
+            python -m pip install --upgrade pip setuptools &&
+            [ -f manylinux.sh ] && sh manylinux.sh || { echo 'manylinux.sh not found'; exit 1; }
         "
         ls -lrth dist/
     - name: Publish package
