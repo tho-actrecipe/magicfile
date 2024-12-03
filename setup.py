@@ -18,7 +18,7 @@ setup(
     author='ActRecipe Inc.',
     author_email='actrecipe-dev@actrecipe.com',
     url="https://github.com/tho-actrecipe/magicfile",
-    version='0.4.31',
+    version='0.4.32',
     packages=find_packages(exclude=('test', 'test.*')),
     include_package_data=True,
     long_description=read('README.md'),
@@ -38,6 +38,7 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
 )

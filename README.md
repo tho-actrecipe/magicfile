@@ -3,6 +3,13 @@
 
 `actrecipemagicfile` is a Python interface to the libmagic file type identification library. libmagic identifies file types by checking their headers against a predefined list. This functionality is accessible from the command line using the Unix command `file`.
 
+Changelog
+
+[2024-12-04]
+
+    New: Added support for Mac Silicon (Python 3.10, 3.11).
+    New: Added support for Linux ARM (Python 3.10, 3.11, 3.12).
+
 ## Usage
 
 ```python
@@ -41,4 +48,7 @@ You can also combine the flag options:
 `actrecipemagicfile` is distributed under the MIT license.  See the included
 LICENSE file for details.
 
-Note: This package is mostly used in an internal project.
+Notes:
+
+- This package is primarily used in an internal project.
+- Support for Mac Silicon and Linux ARM is effective from 2024-12-04.
