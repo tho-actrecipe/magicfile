@@ -145,6 +145,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      - name: Enable QEMU for cross-platform builds
+        run: |
+          sudo apt-get install -y qemu-user-static
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: Build manylinux wheels
         run: |
           docker run --platform linux/arm64 --rm -v `pwd`:/io -w /io quay.io/pypa/manylinux2014_aarch64 sh manylinux.sh
