@@ -8,21 +8,35 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        python-version: [3.8, 3.9, "3.10", 3.11]
+        os: [ ubuntu-20.04 ]
+        python-version: [ 3.8, 3.9, "3.10", 3.11 ]
+        arch: [ x86_64, aarch64 ]  # Add architecture support
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+
       - name: Install libmagic
         run: |
           wget -O /tmp/file.tar.gz http://archive.ubuntu.com/ubuntu/pool/main/f/file/file_5.38.orig.tar.gz
           cd /tmp && tar zxf file.tar.gz && cd -
-          cd /tmp/file-5.38 && ./configure --prefix=/usr/local && make && sudo make install && cd -
+          cd /tmp/file-5.38
+          ./configure --prefix=/usr/local
+          make
+          sudo make install
+          cd -
+
+      - name: Set Architecture Flags
+        if: ${{ matrix.arch == 'aarch64' }}
+        run: |
+          export CFLAGS="-march=armv8-a"
+
       - name: Run test cases
         run: |
           pip install coverage
