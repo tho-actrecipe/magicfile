@@ -97,16 +97,17 @@ jobs:
         run: |
           # Ensure project files are accessible to Docker container
           PROJECT_DIR=`pwd`
+          PYTHON_VERSION_SHORT=$(echo ${{ matrix.python-version }} | tr -d .)
           if [ "${{ matrix.arch }}" = "x86_64" ]; then
             docker run --platform linux/amd64 --rm \
               -v $PROJECT_DIR:/io \
               quay.io/pypa/manylinux2014_x86_64 \
-              /opt/python/cp${{ matrix.python-version//./}}-cp${{ matrix.python-version//./}}/bin/python /io/setup.py bdist_wheel
+              /opt/python/cp${PYTHON_VERSION_SHORT}-cp${PYTHON_VERSION_SHORT}/bin/python /io/setup.py bdist_wheel
           elif [ "${{ matrix.arch }}" = "aarch64" ]; then
             docker run --platform linux/arm64 --rm \
               -v $PROJECT_DIR:/io \
               quay.io/pypa/manylinux2014_aarch64 \
-              /opt/python/cp${{ matrix.python-version//./}}-cp${{ matrix.python-version//./}}/bin/python /io/setup.py bdist_wheel
+              /opt/python/cp${PYTHON_VERSION_SHORT}-cp${PYTHON_VERSION_SHORT}/bin/python /io/setup.py bdist_wheel
           fi
           ls -lrth dist/
 
