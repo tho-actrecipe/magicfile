@@ -179,11 +179,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      # Step 3: Install Visual Studio Build Tools
-      - name: Install Visual Studio Build Tools
-        run: |
-          choco install visualstudio2019buildtools -y --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools"
-
       # Step 4: Upgrade pip, setuptools, and wheel
       - name: Upgrade pip, setuptools, and wheel
         run: |
